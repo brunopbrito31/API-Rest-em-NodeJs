@@ -1,7 +1,8 @@
 const db = require('../database');
-const { DataTypes } = require('sequelize')
+const { DataTypes } = require('sequelize');
+const { Fabricantes } = require('../models/Fabricante')
 
-const Produtos = db.define(
+const Produto = db.define(
     'Produtos', 
     {
         id:{
@@ -18,6 +19,13 @@ const Produtos = db.define(
         quantidade:{
             type: DataTypes.INTEGER,
         },
+        fabricante_id:{
+            type: DataTypes.INTEGER,
+            references:{
+                model: Fabricantes,
+                key:'id'
+            }
+        },
         createdAt:{
             type: DataTypes.DATE,
         },
@@ -30,4 +38,4 @@ const Produtos = db.define(
     }
 );
 
-module.exports = Produtos;
+module.exports = Produto;
