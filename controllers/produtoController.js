@@ -13,13 +13,19 @@ const produtoController = {
         const novoProduto = await Produto.create({
             nome, preco, quantidade
         })
-        
+        res.status(201);
         res.json(novoProduto);
     },
 
     async listarProdutoEsp (req, res){
         const listaProdutos = await Produto.findAll({where:{id:req.params.id}});
-        res.json(listaProdutos);
+
+        if(listaProdutos.length > 0){
+            res.json(listaProdutos)
+        }else{
+            res.status(404);
+            res.json(null);
+        }
     },
 }
 
