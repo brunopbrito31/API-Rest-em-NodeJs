@@ -13,19 +13,15 @@ const produtoController = {
         const novoProduto = await Produto.create({
             nome, preco, quantidade
         })
-        res.status(201);
-        res.json(novoProduto);
+        res.status(201).json(novoProduto);
     },
 
     async listarProdutoEsp (req, res){
         const listaProdutos = await Produto.findAll({where:{id:req.params.id}});
 
-        if(listaProdutos.length > 0){
+        listaProdutos.length > 0 ?
             res.json(listaProdutos)
-        }else{
-            res.status(404);
-            res.json(null);
-        }
+            : res.status(404).json({erro:"Produto não existente"});
     },
 }
 
